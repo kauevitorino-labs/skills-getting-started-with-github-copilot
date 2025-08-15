@@ -13,28 +13,42 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear loading message
       activitiesList.innerHTML = "";
 
-      // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
-        const activityCard = document.createElement("div");
-        activityCard.className = "activity-card";
+  const activityCard = document.createElement("div");
+  activityCard.className = "activity-card";
 
-        const spotsLeft = details.max_participants - details.participants.length;
+  const spotsLeft = details.max_participants - details.participants.length;
 
-        activityCard.innerHTML = `
-          <h4>${name}</h4>
-          <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
-        `;
+  // Monta a lista de participantes
+  let participantsList = "";
+  if (details.participants.length > 0) {
+    participantsList =
+      "<ul>" +
+      details.participants.map(p => `<li>${p}</li>`).join("") +
+      "</ul>";
+  } else {
+    participantsList = "<ul><li><em>Nenhum participante ainda.</em></li></ul>";
+  }
 
-        activitiesList.appendChild(activityCard);
+  activityCard.innerHTML = `
+    <h4>${name}</h4>
+    <p>${details.description}</p>
+    <p><strong>Schedule:</strong> ${details.schedule}</p>
+    <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+    <div class="participants-section">
+      <strong>Participantes:</strong>
+      ${participantsList}
+    </div>
+  `;
 
-        // Add option to select dropdown
-        const option = document.createElement("option");
-        option.value = name;
-        option.textContent = name;
-        activitySelect.appendChild(option);
-      });
+  activitiesList.appendChild(activityCard);
+
+  // Add option to select dropdown
+  const option = document.createElement("option");
+  option.value = name;
+  option.textContent = name;
+  activitySelect.appendChild(option);
+});
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);

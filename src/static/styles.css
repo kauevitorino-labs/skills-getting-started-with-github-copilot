@@ -142,3 +142,26 @@ footer {
   padding: 20px;
   color: #666;
 }
+
+.activity-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5em;
+  margin-bottom: 2em;
+  background: #fafbfc;
+  box-shadow: 0 2px 8px #0001;
+}
+.participants-section {
+  margin-top: 1em;
+  background: #f0f4fa;
+  border-radius: 8px;
+  padding: 0.7em 1em;
+}
+.participants-section ul {
+  margin: 0.5em 0 0 1em;
+  padding: 0;
+}
+.participants-section li {
+  font-size: 0.98em;
+  color: #2d3a4a;
+}
